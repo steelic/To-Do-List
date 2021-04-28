@@ -1,31 +1,5 @@
-const toDoList = 
-[
-    {
-        title: 'Respond to email messages',
-        completion: true
-    },
-
-    {
-        title: 'Go to the laundromat',
-        completion: true
-    },
-
-    {
-        title: 'Go to the gym',
-        completion: false
-    },
-
-    {
-        title: 'Go grocery shopping',
-        completion: false
-    },
-
-    {
-        title: 'Go to the post office',
-        completion: false
-    }
-
-]
+let toDoList = 
+[]
 
 //Here, a constant variable named filter is declared, and its value is a string object called searchText.
 //The searchText object's purpose is to store the results of the user inputed string, which is being entered in the filter-toDoList input in the HTML doc.
@@ -37,6 +11,12 @@ const filter =
 const hideFilter =
 {
     completion: false
+}
+
+const todoJSON = localStorage.getItem('todo')
+if(todoJSON !== null)
+{
+    toDoList = JSON.parse(todoJSON)
 }
 
 const renderToDoList = function (toDoList, filter)
@@ -126,7 +106,16 @@ document.querySelector("#todo-form").addEventListener('submit', function (e)
             completion: false
         }
     )
+    
+    localStorage.setItem('todo', JSON.stringify(toDoList))
     renderToDoList(toDoList, filter)
     e.target.elements.createToDo.value = ''
+})
+
+document.querySelector('#remove-all-todo').addEventListener('click', function(e)
+{
+    localStorage.clear()
+    document.querySelector('#toDoList').innerHTML =  ''
+    document.querySelector('#incompleteTodos').innerHTML =  ''
 })
 
