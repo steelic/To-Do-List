@@ -1,8 +1,5 @@
-let toDoList = 
-[]
+let toDoList = getSavedTodos()
 
-//Here, a constant variable named filter is declared, and its value is a string object called searchText.
-//The searchText object's purpose is to store the results of the user inputed string, which is being entered in the filter-toDoList input in the HTML doc.
 const filter = 
 {
     searchText: ''
@@ -13,82 +10,6 @@ const hideFilter =
     completion: false
 }
 
-const todoJSON = localStorage.getItem('todo')
-if(todoJSON !== null)
-{
-    toDoList = JSON.parse(todoJSON)
-}
-
-const renderToDoList = function (toDoList, filter)
-{
-    const filteredToDoList = toDoList.filter(function (todo)
-    {
-        return todo.title.toLowerCase().includes(filter.searchText.toLowerCase())
-    })
-
-    document.querySelector('#toDoList').innerHTML =  ''
-
-    filteredToDoList.forEach(function (todo)
-    {
-        const toDoListElement = document.createElement('p')
-        toDoListElement.textContent = todo.title
-        document.querySelector('#toDoList').appendChild(toDoListElement)
-    })
-
-    document.querySelector('#incompleteTodos').innerHTML =  ''
-
-    const remainingTodos = function ()
-    {
-        let toDosLeft = 0
-    
-        filteredToDoList.forEach(function(todo)
-        {
-            if(todo.completion == false)
-            {
-                toDosLeft = toDosLeft + 1
-            }
-        })
-        const toDosLeftMessage = document.createElement('h4')
-        toDosLeftMessage.textContent = `You have ${toDosLeft} to-dos left.`
-        document.querySelector('#incompleteTodos').appendChild(toDosLeftMessage)
-    }
-    remainingTodos()
-
-    const hideTodos = function ()
-    {
-        document.querySelector('#toDoList').innerHTML =  ''
-        
-        filteredToDoList.forEach(function(todo)
-        {
-            if(todo.completion == hideFilter.completion)
-            {
-                const hiddenTodos = document.createElement('p')
-                hiddenTodos.textContent = todo.title
-                document.querySelector('#toDoList').appendChild(hiddenTodos)
-            }
-        })
-        remainingTodos()
-    }
-    document.querySelector('#hide-todos').addEventListener('change',function(e)
-    {
-        if(e.target.checked)
-        {
-            document.querySelector('#incompleteTodos').innerHTML =  ''
-            hideTodos()
-        }
-        else
-        {
-            document.querySelector('#toDoList').innerHTML =  ''
-            filteredToDoList.forEach(function (todo)
-            {
-                const toDoListElement = document.createElement('p')
-                toDoListElement.textContent = todo.title
-                document.querySelector('#toDoList').appendChild(toDoListElement)
-            })
-        }
-    })
-
-}
 renderToDoList(toDoList,filter)
 
 document.querySelector('#search-text').addEventListener('input', function (e)
@@ -106,8 +27,7 @@ document.querySelector("#todo-form").addEventListener('submit', function (e)
             completion: false
         }
     )
-    
-    localStorage.setItem('todo', JSON.stringify(toDoList))
+    saveTodos()
     renderToDoList(toDoList, filter)
     e.target.elements.createToDo.value = ''
 })
@@ -118,4 +38,3 @@ document.querySelector('#remove-all-todo').addEventListener('click', function(e)
     document.querySelector('#toDoList').innerHTML =  ''
     document.querySelector('#incompleteTodos').innerHTML =  ''
 })
-
