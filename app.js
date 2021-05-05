@@ -23,6 +23,7 @@ document.querySelector("#todo-form").addEventListener('submit', function (e)
     e.preventDefault()
     toDoList.push(
         {
+            id: uuidv4(),
             title: e.target.elements.createToDo.value,
             completion: false
         }
@@ -34,7 +35,13 @@ document.querySelector("#todo-form").addEventListener('submit', function (e)
 
 document.querySelector('#remove-all-todo').addEventListener('click', function(e)
 {
+    while(toDoList.length > 0) 
+    {
+        toDoList.pop()
+        document.querySelector('#incompleteTodos').innerHTML =  ''
+    }
     localStorage.clear()
     document.querySelector('#toDoList').innerHTML =  ''
-    document.querySelector('#incompleteTodos').innerHTML =  ''
+    saveTodos()
+    renderToDoList(toDoList, filter)
 })
