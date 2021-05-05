@@ -5,19 +5,24 @@
     <title>To-Do List Web App</title>
 </head>
 <body>
-    <h2>To-Do List</h1>
-    <input id = "search-text" type = "text" placeholder = "Filter To-Do List">
-    <label>
-        Hide completed  <input id='hide-todos' type='checkbox'>
-    </label>
-    <h4>Current List:</h4>
-    <div id = "toDoList"></div>
-    <div id = "incompleteTodos"></div>
+    <h2>Sample Project: To-Do List</h1>
+    <h3>A basic to-do list web application.</h3>
     <form  id="todo-form">
-        <input type = "text" placeholder = "Enter a new to-do" name="createToDo">
+        <input type = "text" placeholder = "Enter a New To-Do" name="createToDo">
         <button>Submit</button>
     </form>
-    <button id = "remove-all-todo">Remove all to-dos</button>
+    <label id = "hide-checkbox">Hide Completed
+        <input id='hide-todos' type='checkbox'>
+     </label>
+    <h4>To-Do List:</h4>
+    <div id = "toDoList"></div>
+    <div id = "incompleteTodos"></div>
+    <input id = "search-text" type = "text" placeholder = "Filter To-Do List">
+    <button id = "remove-all-todo">Delete All To-Dos</button>
+    <script>
+        document.getElementById("hide-checkbox").style.marginLeft= "300px"
+    </script>
+    <script src = "uuidv4.js"></script>
     <script src = "todo-functions.js"></script>
     <script src = "app.js"></script>
 </body>
