@@ -1,0 +1,8 @@
+This is a basic to-do list web application.
+
+There are four main files needed to run this application.
+
+1. index.html. This file contains basic HTML functionality such as buttons and other page elements, and running src files.
+2. app.js. This file runs functions which have been refactored in the todo-functions.js file.
+3. todo-functions.js. This file contains the vital functions needing for running the application, including creating new to-dos, saving to-dos to localStorage, and DOM rendering.
+4. uuidv4.js. This file contains a function that is used to give each to-do a unqiue reference ID, which is used for a variety of purposes.
